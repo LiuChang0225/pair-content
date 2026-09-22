@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/LiuChang0225/pair-content/catalog.schema.json",
+  "title": "PAIR Content Catalog",
+  "description": "已发布内容项的权威清单。只有合入 main 的 catalog.json 才允许打包发布。",
+  "type": "object",
+  "required": ["schemaVersion", "version", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "version": {
+      "description": "内容包版本（语义化，只增不减），每次发布前 bump",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/contentItem" }
+    }
+  },
+  "$defs": {
+    "domain": {
+      "description": "研发域（第一归类轴）",
+      "enum": ["SYS", "SWE", "MEE", "EEE", "SUP", "MAN", "GEN"]
+    },
+    "stage": {
+      "description": "研发阶段（第二归类轴，跨域统一 V 模型阶段）",
+      "enum": [
+        "requirement-analysis",
+        "architecture-design",
+        "detailed-design",
+        "implementation",
+        "unit-verification",
+        "integration-verification",
+        "acceptance"
+      ]
+    },
+    "contentItem": {
+      "type": "object",
+      "required": ["id", "name", "type", "domain", "stage", "version", "owner", "description", "install"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "全局唯一 id，也是内容目录名（skills/<id>、mcp/<id>）",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "name": { "description": "面向同事的显示名（中文）", "type": "string", "minLength": 1 },
+        "type": { "enum": ["skill", "mcp", "agent", "script"] },
+        "domain": { "$ref": "#/$defs/domain" },
+        "stage": { "$ref": "#/$defs/stage" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "owner": { "description": "内容负责人（准入审批人）", "type": "string", "minLength": 1 },
+        "description": { "description": "一两句话说明用途，Hub/目录展示用", "type": "string", "minLength": 1 },
+        "source": {
+          "description": "公开源改造内容的来源 URL（管控追溯）；完全原创可省略",
+          "type": "string",
+          "format": "uri"
+        },
+        "requires": {
+          "description": "运行时依赖声明；桌面壳据此校验捆绑运行时是否满足",
+          "type": "array",
+          "items": { "enum": ["python", "node"] },
+          "uniqueItems": true
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "uniqueItems": true
+        },
+        "install": {
+          "description": "工位侧安装描述，pair-updater 按 kind 分发",
+          "type": "object",
+          "required": ["kind", "path"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "description": "file=随内容包拷贝到内容根；http=streamable-http MCP 端点（path 为 URL）",
+              "enum": ["file", "http"]
+            },
+            "path": { "type": "string", "minLength": 1 }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "skill" } } },
+          "then": {
+            "properties": { "install": { "properties": { "path": { "pattern": "^skills/" } } } }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "mcp" } } },
+          "then": {
+            "properties": { "install": { "properties": { "path": { "pattern": "^(mcp/|https?://)" } } } }
+          }
+        }
+      ]
+    }
+  }
+}

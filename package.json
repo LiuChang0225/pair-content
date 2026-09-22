@@ -1,0 +1,9 @@
+{
+  "name": "pair-content",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "pack": "node scripts/pack.mjs"
+  }
+}
