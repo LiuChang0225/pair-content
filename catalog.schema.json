@@ -24,7 +24,7 @@
       "enum": ["SYS", "SWE", "MEE", "EEE", "SUP", "MAN", "GEN"]
     },
     "stage": {
-      "description": "研发阶段（第二归类轴，跨域统一 V 模型阶段）",
+      "description": "研发阶段（第二归类轴，跨域统一 V 模型阶段；general 为横向/办公类内容的兜底值）",
       "enum": [
         "requirement-analysis",
         "architecture-design",
@@ -32,7 +32,8 @@
         "implementation",
         "unit-verification",
         "integration-verification",
-        "acceptance"
+        "acceptance",
+        "general"
       ]
     },
     "contentItem": {

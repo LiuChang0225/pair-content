@@ -14,6 +14,7 @@ const STAGES = new Set([
   'unit-verification',
   'integration-verification',
   'acceptance',
+  'general',
 ])
 const TYPES = new Set(['skill', 'mcp', 'agent', 'script'])
 const REQUIRED_FIELDS = ['id', 'name', 'type', 'domain', 'stage', 'version', 'owner', 'description', 'install']

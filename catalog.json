@@ -1,5 +1,136 @@
 {
   "schemaVersion": 1,
   "version": "0.1.0",
-  "items": []
+  "items": [
+    {
+      "id": "requirements-parsing",
+      "name": "需求解析",
+      "type": "skill",
+      "domain": "SWE",
+      "stage": "requirement-analysis",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "把 RFQ、会议纪要、邮件等非结构化需求材料解析为结构化需求清单（编号/类型/验收判据/假设/冲突/未决问题）",
+      "source": "https://github.com/mattpocock/skills/tree/main/skills/engineering/to-spec",
+      "install": { "kind": "file", "path": "skills/requirements-parsing" }
+    },
+    {
+      "id": "code-review",
+      "name": "代码评审",
+      "type": "skill",
+      "domain": "SWE",
+      "stage": "implementation",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "双轴代码评审：规范轴（仓库规范 + 坏味道基线）与需求轴（对照 spec），输出带证据的评审报告",
+      "source": "https://github.com/mattpocock/skills/tree/main/skills/engineering/code-review",
+      "install": { "kind": "file", "path": "skills/code-review" }
+    },
+    {
+      "id": "tdd-unit-test",
+      "name": "单元测试生成（TDD）",
+      "type": "skill",
+      "domain": "SWE",
+      "stage": "unit-verification",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "测试驱动开发纪律与单测生成：seam 约定、红绿循环、好测试标准与反模式自查清单",
+      "source": "https://github.com/mattpocock/skills/tree/main/skills/engineering/tdd",
+      "install": { "kind": "file", "path": "skills/tdd-unit-test" }
+    },
+    {
+      "id": "log-diagnosis",
+      "name": "日志与故障诊断",
+      "type": "skill",
+      "domain": "SUP",
+      "stage": "integration-verification",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "疑难故障诊断循环：先建可复现反馈回路，再二分定位与假设验证；含工程现场多源日志对齐方法，全程脱敏",
+      "source": "https://github.com/mattpocock/skills/tree/main/skills/engineering/diagnosing-bugs",
+      "install": { "kind": "file", "path": "skills/log-diagnosis" }
+    },
+    {
+      "id": "weekly-report",
+      "name": "周报与项目状态报告",
+      "type": "skill",
+      "domain": "MAN",
+      "stage": "general",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "把零散工作记录整理成 3P（进展/计划/问题）结构化报告，按受众分层裁剪，可导出 Word",
+      "install": { "kind": "file", "path": "skills/weekly-report" }
+    },
+    {
+      "id": "bom-check",
+      "name": "BOM 核对",
+      "type": "skill",
+      "domain": "EEE",
+      "stage": "detailed-design",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "物料清单一致性检查：结构完整性、单位量纲、重复与疑似错料、合规对照、跨版本 diff；只报证据不做决策",
+      "install": { "kind": "file", "path": "skills/bom-check" }
+    },
+    {
+      "id": "pdf-processing",
+      "name": "PDF 处理",
+      "type": "skill",
+      "domain": "GEN",
+      "stage": "general",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "PDF 文本/元数据/表单提取，页面合并/拆分/旋转/抽取",
+      "requires": ["python"],
+      "install": { "kind": "file", "path": "skills/pdf-processing" }
+    },
+    {
+      "id": "docx-processing",
+      "name": "Word 文档处理",
+      "type": "skill",
+      "domain": "GEN",
+      "stage": "general",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "Word 文档提取（标题层级转 Markdown）、从 Markdown 生成 docx（支持公司模板）、文本替换",
+      "requires": ["python"],
+      "install": { "kind": "file", "path": "skills/docx-processing" }
+    },
+    {
+      "id": "xlsx-processing",
+      "name": "Excel 处理",
+      "type": "skill",
+      "domain": "GEN",
+      "stage": "general",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "Excel 读取（Markdown/CSV、公式与缓存值）、生成与追加工作表",
+      "requires": ["python"],
+      "install": { "kind": "file", "path": "skills/xlsx-processing" }
+    },
+    {
+      "id": "pptx-processing",
+      "name": "PPT 处理",
+      "type": "skill",
+      "domain": "GEN",
+      "stage": "general",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "PPT 大纲与备注提取、从 Markdown 大纲生成 pptx（支持公司模板母版）",
+      "requires": ["python"],
+      "install": { "kind": "file", "path": "skills/pptx-processing" }
+    },
+    {
+      "id": "filesystem-mcp",
+      "name": "本地文件访问 MCP",
+      "type": "mcp",
+      "domain": "GEN",
+      "stage": "general",
+      "version": "0.1.0",
+      "owner": "LiuChang",
+      "description": "官方 filesystem MCP server 连接模板：受控访问指定本地目录（白名单限定）",
+      "source": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "install": { "kind": "file", "path": "mcp/filesystem" }
+    }
+  ]
 }
