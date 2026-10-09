@@ -1,12 +1,25 @@
 # Third-Party Notices
 
+## MIT 许可内容（原样再分发，未修改）
+
+以下内容项为 Matt Pocock 的公开 skills 仓库（MIT License, Copyright (c) 2026 Matt Pocock，
+https://github.com/mattpocock/skills，上游 commit `b0618bc436ad893b3c5e84e55fba86586d34a404`，2026-10-08）
+中 `skills/` 目录下对应子目录的**逐字节原样拷贝**（含 SKILL.md 及全部随包文件），未做任何修改：
+
+- engineering（20 项）：`ask-matt`、`code-review`、`codebase-design`、`diagnosing-bugs`、
+  `domain-modeling`、`grill-with-docs`、`implement`、`implement-spec`、`improve-codebase-architecture`、
+  `pr`、`prototype`、`research`、`retro`、`setup-matt-pocock-skills`、`tdd`、`to-spec`、`to-tickets`、
+  `triage`、`wayfinder`、`wizard`
+- productivity（3 项，为上述 skill 的调用依赖）：`grill-me`、`grilling`、`handoff`
+
+历史说明：v0.1.0 曾收录改编版 `skills/code-review` 与 `skills/tdd-unit-test`，v0.2.0 起由上游原版取代并移除。
+
 ## MIT 许可内容（改造再利用，保留原始版权声明）
 
 以下内容项基于 Matt Pocock 的公开 skills 仓库（MIT License, Copyright (c) 2026 Matt Pocock，
 https://github.com/mattpocock/skills）改造并汉化：
 
-- `skills/code-review`（源自 engineering/code-review）
-- `skills/tdd-unit-test`（源自 engineering/tdd，含 tests.md 与 mocking.md 要点）
+- `skills/requirements-parsing`（源自 engineering/to-spec，改造为面向 RFQ/会议纪要的需求解析）
 - `skills/log-diagnosis`（源自 engineering/diagnosing-bugs）
 
 MIT License 全文：
