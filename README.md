@@ -13,6 +13,7 @@ skills/<name>/SKILL.md  skill 内容项（平铺一层——dsh-skill-filesystem
                         <root>/<name>/SKILL.md，不递归；阶段归类放 catalog 元数据，
                         不要试图用嵌套目录表达）
 mcp/<name>/           MCP connector 内容项（配置 + 必要的随包文件）
+docs/                 面向使用者的流程指引等文档（不随内容包分发）
 scripts/              维护者工具（校验、打包）
 dist/                 打包产物（不入库）
 ```
