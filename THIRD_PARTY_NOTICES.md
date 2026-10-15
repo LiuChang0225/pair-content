@@ -22,6 +22,17 @@ https://github.com/mattpocock/skills）改造并汉化：
 - `skills/requirements-parsing`（源自 engineering/to-spec，改造为面向 RFQ/会议纪要的需求解析）
 - `skills/log-diagnosis`（源自 engineering/diagnosing-bugs）
 
+## MIT 许可内容（改造再利用 — daymade/claude-code-skills）
+
+`skills/pair-meeting-minutes-skill` 基于 daymade 的公开 skills 仓库（MIT License,
+Copyright (c) 2025 daymade，https://github.com/daymade/claude-code-skills，上游 commit
+`1c199056100694c1be522c2f3f045b48cf51a8c2`，2026-10-15）中 `daymade-audio/meeting-minutes-taker`
+改造收录。改动范围：更名为 pair-meeting-minutes-skill；移除 `disable-model-invocation`
+（允许按"会议纪要/整理纪要"等触发词自动调用）；对未收录配套 skill 的悬空引用
+（doc-to-markdown、transcript-fixer、pdf-creator、ppt-creator）替换为本库等价 skill
+（docx-processing、pdf-processing、pptx-processing）或内联替代步骤。主体工作流、
+references 模板与检查清单保持原样。
+
 MIT License 全文：
 
 ```
