@@ -4,8 +4,8 @@ description: >-
   Transforms raw meeting transcripts into structured, evidence-based meeting minutes — merges
   multiple versions without losing content, reviews existing minutes against the transcript for
   missing items, and identifies anonymous speakers (Speaker 1/2/3, 发言人1). Triggers on 会议纪要, 会议记录,
-  整理纪要, 妙记转纪要, "write meeting minutes", "merge these minutes". For heavily corrupted ASR/STT
-  transcripts, clean up obvious transcription typos inline before quoting.
+  整理纪要, 妙记转纪要, "write meeting minutes", "merge these minutes". For corrupted ASR/STT
+  transcripts, run the bundled `transcript-fixer` skill first — do not fix transcription errors inline.
 ---
 
 # Meeting Minutes（会议纪要整理）
@@ -16,7 +16,8 @@ Transform raw meeting transcripts into comprehensive, evidence-based meeting min
 
 **Pre-processing (Optional but Recommended):**
 - **Document conversion**: Use the bundled `docx-processing` / `pdf-processing` skills to convert .docx/.pdf transcripts to Markdown first (preserves tables/images)
-- **Transcript cleanup**: If transcript quality is poor, fix obvious ASR/STT typos inline before quoting (never change meaning)
+- **Transcript cleanup**: If transcript quality is poor (homophones, garbled terms, wrong person names), run the bundled `transcript-fixer` skill BEFORE generating minutes — dictionary rules plus AI correction with a review queue; never silently rewrite transcript wording inside this skill
+- **PAIR meeting recordings**: transcripts produced by the PAIR 会议记录 feature (Bailian ASR, timestamped sentences, no speaker labels) are valid input — see `docs/会议纪要管线指引.md` for extraction; speaker identification then relies on text inference with user confirmation
 - **Context file**: Prepare `context.md` with team directory for accurate speaker identification
 
 **Core Workflow:**
@@ -55,7 +56,7 @@ Copy this checklist and track progress:
 
 ```
 Meeting Minutes Progress:
-- [ ] Step 0 (Optional): Pre-process transcript (docx/pdf → Markdown; fix obvious ASR typos)
+- [ ] Step 0 (Optional): Pre-process transcript (docx/pdf → Markdown; run `transcript-fixer` if quality is poor)
 - [ ] Step 1: Read and analyze transcript
 - [ ] Step 1.5: Speaker identification (if transcript has "Speaker 1/2/3")
   - [ ] Phase 0 FIRST: ask user to label speakers on the source platform (Feishu Minutes / Tencent Meeting), re-export, use labeled transcript
@@ -507,7 +508,7 @@ If v3 has a flowchart for "Status Query Mechanism" but v1/v2 don't have it, that
 ```
 Step 0: docx-processing / pdf-processing  # Convert .docx/.pdf → Markdown (preserves tables/images)
         ↓
-Step 0.5: inline ASR cleanup              # Fix obvious ASR errors (optional, if quality is poor)
+Step 0.5: transcript-fixer                # Correct ASR/STT errors (optional, if quality is poor)
         ↓
 Step 1+: pair-meeting-minutes-skill       # Generate structured minutes
 ```
@@ -521,7 +522,7 @@ Then run this skill on the resulting `transcript.md`.
 **Benefits of combo workflow:**
 - **Tables preserved**: Word tables become Markdown tables
 - **Images extracted**: Can be embedded in final minutes
-- **Cleaner quotes**: removing ASR typos before quote extraction
+- **Cleaner quotes**: transcript-fixer removes ASR typos before quote extraction
 - **Accurate speaker ID**: Style analysis works better on clean text
 - **正交设计**: Each skill does one thing well, composable pipeline
 

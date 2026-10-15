@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "items": [
     {
       "id": "requirements-parsing",
@@ -480,14 +480,29 @@
       }
     },
     {
-      "id": "pair-meeting-minutes-skill",
-      "name": "会议纪要整理",
+      "id": "transcript-fixer",
+      "name": "会议转写纠错（ASR 修复）",
       "type": "skill",
       "domain": "GEN",
       "stage": "general",
       "version": "0.1.0",
       "owner": "LiuChang",
-      "description": "把会议录音转写稿整理为结构化、证据可溯的会议纪要：多轮并行生成+UNION合并防丢内容、发言人识别（飞书妙记/腾讯会议源头标注优先）、决策必带原文引用、检索自测、Mermaid 图，中文输出；说\"整理会议纪要\"即可触发",
+      "description": "修复 ASR/STT 转写错误：同音字、乱码术语、人名错误、中英混杂。两阶段=确定性词典规则（项目域+风险分级+词边界防误报）+ AI 全文纠错；人名修改必须附权威引证；不确定项进评审队列（web dashboard），未清零不得声明最终版；确认过的修复自动收割回项目词典越用越准。与 pair-meeting-minutes-skill 配对：先纠错、后整理纪要；说\"修复转写/整理转写稿\"即可触发",
+      "source": "https://github.com/daymade/claude-code-skills/tree/main/daymade-audio/transcript-fixer",
+      "install": {
+        "kind": "file",
+        "path": "skills/transcript-fixer"
+      }
+    },
+    {
+      "id": "pair-meeting-minutes-skill",
+      "name": "会议纪要整理",
+      "type": "skill",
+      "domain": "GEN",
+      "stage": "general",
+      "version": "0.2.0",
+      "owner": "LiuChang",
+      "description": "把会议转写稿整理为结构化、证据可溯的会议纪要：多轮并行生成+UNION合并防丢内容、发言人识别（源头标注优先）、决策必带原文引用、检索自测、Mermaid 图，中文输出；输入含 PAIR 会议记录（百炼 ASR 时间戳句子）转写；转写质量差时先调用同库 transcript-fixer 纠错再生成；说\"整理会议纪要\"即可触发",
       "source": "https://github.com/daymade/claude-code-skills/tree/main/daymade-audio/meeting-minutes-taker",
       "install": {
         "kind": "file",
