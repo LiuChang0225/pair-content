@@ -24,6 +24,17 @@ https://github.com/mattpocock/skills）改造并汉化：
 
 ## MIT 许可内容（改造再利用 — daymade/claude-code-skills）
 
+`skills/transcript-fixer` 为 daymade 公开 skills 仓库（MIT License, Copyright (c) 2025 daymade，
+https://github.com/daymade/claude-code-skills，上游 commit `b5b5173ae7ff6ace8292ec97e95d2f0dff38d59b`，
+2026-10-15）中 `daymade-audio/transcript-fixer` 的原样收录（含全部 99 个 Python 脚本、25 个
+references 文档、tests、requirements.txt、CHANGELOG），仅对 SKILL.md 做 4 处悬空引用修复：
+`/daymade-audio:meeting-minutes-taker` 改指本库 `pair-meeting-minutes-skill`（description 与
+Handoff 两处）；`/daymade-audio:asr-transcribe-to-text`（未收录，且其本地转写依赖 macOS/Apple
+Silicon 的 MLX）改为 PAIR 会议记录（百炼 ASR）全量重转写路径并保留同引擎非独立佐证声明；
+MLX runner 示例注释改为不可用声明。references/ 中对 asr-transcribe-to-text 的高级路径引用
+（跨 ASR 引擎音频验证）保持原样：该路径依赖未收录的姊妹 skill，在 PAIR（Windows）部署按
+skill 自带的证据升级政策自然降级，不构成悬空调用。
+
 `skills/pair-meeting-minutes-skill` 基于 daymade 的公开 skills 仓库（MIT License,
 Copyright (c) 2025 daymade，https://github.com/daymade/claude-code-skills，上游 commit
 `1c199056100694c1be522c2f3f045b48cf51a8c2`，2026-10-15）中 `daymade-audio/meeting-minutes-taker`
@@ -31,7 +42,9 @@ Copyright (c) 2025 daymade，https://github.com/daymade/claude-code-skills，上
 （允许按"会议纪要/整理纪要"等触发词自动调用）；对未收录配套 skill 的悬空引用
 （doc-to-markdown、transcript-fixer、pdf-creator、ppt-creator）替换为本库等价 skill
 （docx-processing、pdf-processing、pptx-processing）或内联替代步骤。主体工作流、
-references 模板与检查清单保持原样。
+references 模板与检查清单保持原样。v0.4.0 起 transcript-fixer 已收录为同库配对 skill，
+原"内联修错字"降级方案改回指向上游设计的 transcript-fixer 预处理管线，并补充
+PAIR 会议记录转写稿作为输入来源的说明。
 
 MIT License 全文：
 
